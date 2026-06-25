@@ -1,6 +1,6 @@
 import express from 'express'
 import { connectDatabase, MONGO_URI } from './config/database'
-import { PORT, API_URL } from './config'
+import { PORT } from './config'
 import usersRouter from './routes/users'
 import teamsRouter from './routes/teams'
 import activitiesRouter from './routes/activities'
@@ -8,6 +8,14 @@ import leaderboardRouter from './routes/leaderboard'
 import workoutsRouter from './routes/workouts'
 
 const app = express()
+
+const codespace = process.env.CODESPACE_NAME
+const API_HOST = codespace
+  ? `${codespace}-8000.app.github.dev`
+  : `localhost:${PORT}`
+const API_URL = codespace
+  ? `https://${API_HOST}`
+  : `http://localhost:${PORT}`
 
 app.use(express.json())
 
