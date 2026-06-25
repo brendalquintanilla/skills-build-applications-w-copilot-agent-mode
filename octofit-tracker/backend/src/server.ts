@@ -1,3 +1,4 @@
+import cors from 'cors'
 import express from 'express'
 import { connectDatabase, MONGO_URI } from './config/database'
 import { PORT } from './config'
@@ -17,6 +18,7 @@ const API_URL = codespace
   ? `https://${API_HOST}`
   : `http://localhost:${PORT}`
 
+app.use(cors())
 app.use(express.json())
 
 app.get('/', (_req, res) => {
