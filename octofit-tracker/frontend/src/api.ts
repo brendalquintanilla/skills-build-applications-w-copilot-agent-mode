@@ -1,7 +1,13 @@
 // Note: Define VITE_CODESPACE_NAME in .env.local for GitHub Codespaces API URL support.
 // Example: VITE_CODESPACE_NAME=cuddly-eureka-6vvggx7wrvr7h5x5p
 
-export const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+const rawCodespaceName = import.meta.env.VITE_CODESPACE_NAME
+const isValidCodespaceName =
+  typeof rawCodespaceName === 'string' &&
+  rawCodespaceName.trim() !== '' &&
+  rawCodespaceName.trim().toLowerCase() !== 'undefined'
+
+export const codespaceName = isValidCodespaceName ? rawCodespaceName.trim() : ''
 export const API_PROTOCOL = codespaceName ? 'https' : 'http'
 export const API_HOST = codespaceName
   ? `${codespaceName}-8000.app.github.dev`
@@ -21,12 +27,8 @@ export function normalizeApiResponse(payload: any) {
     return { items: payload, meta: null }
   }
 
-  if (Array.isArray(payload.data)) {
-    return { items: payload.data, meta: payload.meta || null }
-  }
-
-  const arrayKeys = ['users', 'teams', 'activities', 'leaderboard', 'workouts', 'results', 'items', 'docs']
-  for (const key of arrayKeys) {
+  const paginatedArrays = ['data', 'items', 'docs', 'results', 'users', 'teams', 'activities', 'leaderboard', 'workouts']
+  for (const key of paginatedArrays) {
     if (Array.isArray(payload[key])) {
       return { items: payload[key], meta: payload.meta || null }
     }
