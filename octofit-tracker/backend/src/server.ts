@@ -1,6 +1,6 @@
 import express from 'express'
-import mongoose from 'mongoose'
-import { PORT, MONGO_URI, API_URL } from './config.js'
+import { connectDatabase, MONGO_URI } from './config/database.js'
+import { PORT, API_URL } from './config.js'
 import usersRouter from './routes/users.js'
 import teamsRouter from './routes/teams.js'
 import activitiesRouter from './routes/activities.js'
@@ -24,10 +24,9 @@ app.use('/api/activities', activitiesRouter)
 app.use('/api/leaderboard', leaderboardRouter)
 app.use('/api/workouts', workoutsRouter)
 
-mongoose
-  .connect(MONGO_URI)
+connectDatabase()
   .then(() => {
-    console.log('Connected to MongoDB')
+    console.log(`Connected to MongoDB at ${MONGO_URI}`)
     app.listen(PORT, () => {
       console.log(`Backend listening on http://localhost:${PORT}`)
       console.log(`API URL: ${API_URL}`)
