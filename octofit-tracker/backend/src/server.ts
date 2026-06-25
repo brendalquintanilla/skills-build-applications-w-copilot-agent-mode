@@ -1,11 +1,11 @@
 import express from 'express'
-import { connectDatabase, MONGO_URI } from './config/database.js'
-import { PORT, API_URL } from './config.js'
-import usersRouter from './routes/users.js'
-import teamsRouter from './routes/teams.js'
-import activitiesRouter from './routes/activities.js'
-import leaderboardRouter from './routes/leaderboard.js'
-import workoutsRouter from './routes/workouts.js'
+import { connectDatabase, MONGO_URI } from './config/database'
+import { PORT, API_URL } from './config'
+import usersRouter from './routes/users'
+import teamsRouter from './routes/teams'
+import activitiesRouter from './routes/activities'
+import leaderboardRouter from './routes/leaderboard'
+import workoutsRouter from './routes/workouts'
 
 const app = express()
 

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import Workout from '../models/workout.js'
+import Workout from '../models/workout'
 
 const router = Router()
 
