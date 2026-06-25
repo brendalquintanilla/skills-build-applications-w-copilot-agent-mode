@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { codespaceName, getFetchUrl, normalizeApiResponse } from '../api'
 
 export default function Activities() {
-  const [activities, setActivities] = useState<any[]>([])
+  const [activities, setActivities] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     const url = getFetchUrl('activities')

@@ -1,5 +1,5 @@
 import { Routes, Route, Link } from 'react-router-dom'
-import Activities from './components/Activities'
+import Activities from './components/Activities.jsx'
 import Leaderboard from './components/Leaderboard'
 import Teams from './components/Teams'
 import Users from './components/Users'
